@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "A drink item in the tea shop menu",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "prices": {
+          "type": "object",
+          "properties": {
+            "M": { "type": "number" },
+            "L": { "type": "number" },
+            "Bottle": { "type": "number" }
+          }
+        },
+        "description": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "available": { "type": "boolean" },
+        "image": { "type": "string" }
+      },
+      "required": ["name", "category", "prices"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "menuItemId": { "type": "string" },
+              "name": { "type": "string" },
+              "size": { "type": "string", "enum": ["M", "L", "Bottle"] },
+              "sugar": { "type": "string" },
+              "ice": { "type": "string" },
+              "toppings": { "type": "array", "items": { "type": "string" } },
+              "quantity": { "type": "number" },
+              "price": { "type": "number" }
+            }
+          }
+        },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customerId", "items", "totalPrice", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Application user",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "customer"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "menuItems": {
+      "schema": "MenuItem",
+      "description": "Store all tea shop menu items"
+    },
+    "orders": {
+      "schema": "Order",
+      "description": "Store all customer orders"
+    },
+    "users": {
+      "schema": "User",
+      "description": "Store user profiles and roles"
+    }
+  }
+}
