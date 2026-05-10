@@ -1,0 +1,6 @@
+{
+  "name": "TeaTime - 專業茶飲點單系統",
+  "description": "一套完整的茶飲點單解決方案，包含顧客前台點餐系統與店家後台訂單管理系統。支援實時訂單追蹤、菜單管理與 Firebase 資料同步。",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
